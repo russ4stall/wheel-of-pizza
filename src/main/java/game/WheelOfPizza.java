@@ -11,16 +11,35 @@ import java.util.Random;
  * @author Russ Forstall
  */
 public class WheelOfPizza {
+    public static final String BANKRUPT = "BANKRUPT";
+    public static final String LOSE_A_TURN = "LOSE A TURN";
     private static final String PUZZLE_PATH = "src/main/resources/puzzles.txt";
     private List<Puzzle> puzzles;
+    private String[] spinValues;
 
     public WheelOfPizza() {
-        puzzles = readPuzzlesFromFile(PUZZLE_PATH);
+        initializePuzzleList();
+        initializeSpinValues();
     }
 
+    //Returns a random puzzle from list,
+    // and removes it so it's not repeated during the same game instance
     public Puzzle getRandomPuzzle() {
         Random random = new Random();
-        return puzzles.get(random.nextInt(puzzles.size()));
+        int i = random.nextInt(puzzles.size());
+        Puzzle puzzle = puzzles.get(i);
+        puzzles.remove(i);
+        return puzzle;
+    }
+
+    private void initializeSpinValues() {
+        spinValues = new String[] {"2500", "300", "300", "300", "300", "300", "300",
+                "600", "500", BANKRUPT, "550", "400", "900", "500", "900", BANKRUPT,
+                "600", "400", LOSE_A_TURN, "800", "350", "450", "700", "600"};
+    }
+
+    private void initializePuzzleList() {
+        puzzles = readPuzzlesFromFile(PUZZLE_PATH);
     }
 
     private List<Puzzle> readPuzzlesFromFile(String filePath) {
@@ -47,4 +66,6 @@ public class WheelOfPizza {
 
         return puzzles;
     }
+
+
 }

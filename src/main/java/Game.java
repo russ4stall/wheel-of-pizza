@@ -3,6 +3,7 @@ package main.java;
 import main.java.game.Player;
 import main.java.game.Puzzle;
 import main.java.game.WheelOfPizza;
+import main.java.gui.MainMenuFrame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,15 @@ public class Game {
     }
 
     public static void main(String[] args) {
+        MainMenuFrame mainMenuFrame = new MainMenuFrame();
+        mainMenuFrame.setVisible(true);
+
+        //
+
+
         //Create players
-        Player p1 = new Player(1, "Russ");
-        Player p2 = new Player(2, "Jesse");
+        Player p1 = new Player(1, "Russ", "127.0.0.1");
+        Player p2 = new Player(2, "Jesse", "127.0.0.1");
 
         WheelOfPizza wop = new WheelOfPizza();
         Game game = new Game();

@@ -7,7 +7,7 @@ public class Puzzle {
     private String category;
     private String phrase;
 
-    public Puzzle(String category, String phrase) {
+    public Puzzle(String hint, String phrase) {
         this.category = category;
         this.phrase = phrase;
     }

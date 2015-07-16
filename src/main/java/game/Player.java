@@ -1,26 +1,19 @@
 package main.java.game;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * @author Russ Forstall
  */
 public class Player {
     private int id;
     private String name;
+    private String ipAddress;
     private int score;
-    private Set<Character> usedLetters;
 
-    public Player(int id, String name) {
+    public Player(int id, String name, String ipAddress) {
         this.id = id;
         this.name = name;
+        this.ipAddress = ipAddress;
         this.score = 0;
-        this.usedLetters = new HashSet<Character>();
-    }
-
-    public void takeTurn() {
-
     }
 
     public int getId() {
@@ -47,11 +40,11 @@ public class Player {
         this.score = score;
     }
 
-    public Set<Character> getUsedLetters() {
-        return usedLetters;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setUsedLetters(Set<Character> usedLetters) {
-        this.usedLetters = usedLetters;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 }
