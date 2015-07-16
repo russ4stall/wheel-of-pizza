@@ -35,6 +35,7 @@ public class MainMenuFrame extends JFrame {
                 }
             });
 
+
             joinBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
