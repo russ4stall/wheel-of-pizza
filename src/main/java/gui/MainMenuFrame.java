@@ -14,7 +14,8 @@ import java.util.Enumeration;
  * @author Russ Forstall
  */
 public class MainMenuFrame extends JFrame {
-    public MainMenuFrame() throws HeadlessException {
+    public MainMenuFrame(String title) throws HeadlessException {
+        super(title);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new Dimension(300,100));
@@ -61,8 +62,13 @@ public class MainMenuFrame extends JFrame {
         }
     }
 
+    /**
+     * Create panels and game object and start the game
+     */
     public void showGameBoard() {
-
+        GameBoardFrame gameBoardFrame = new GameBoardFrame();
+        TopGamePanel topGamePanel = new TopGamePanel();
+        BottomGamePanel bottomGamePanel = new BottomGamePanel();
     }
 
     public String getUserLanIp() {

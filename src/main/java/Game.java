@@ -24,7 +24,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        MainMenuFrame mainMenuFrame = new MainMenuFrame();
+        MainMenuFrame mainMenuFrame = new MainMenuFrame("Wheel Of Pizza");
         mainMenuFrame.setVisible(true);
     }
 
