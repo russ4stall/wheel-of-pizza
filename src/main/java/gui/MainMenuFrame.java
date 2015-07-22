@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 /**
  * @author Russ Forstall
@@ -15,13 +20,14 @@ public class MainMenuFrame extends JFrame {
         setSize(new Dimension(300,100));
         add(new MainMenuPanel());
 
-
     }
 
-    class MainMenuPanel extends JPanel {
+    class MainMenuPanel extends JPanel  {
+        private final int PORT_NUMBER = 86754;
         private JButton createBtn = new JButton("CREATE GAME");
         private JButton joinBtn = new JButton("JOIN GAME");
-        String ipAddress;
+        String serverIp;
+        String clientIp;
 
         public MainMenuPanel() {
             super();
@@ -30,18 +36,22 @@ public class MainMenuFrame extends JFrame {
             createBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    // Set up socket server
-                    // Display Ip and wait for opponent (client)
+
+                    serverIp = getUserLanIp();
+
+                    // TODO: Display "Waiting for opponent" dialog (also show IP)
+                    // TODO: Open socket server and wait for connection from client
+
+                    showGameBoard();
                 }
             });
-
 
             joinBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     //show text input for server ip
-                    ipAddress = JOptionPane.showInputDialog("Please input the IP address of your opponent");
-                    //
+                    serverIp = JOptionPane.showInputDialog("Please input the IP address of your opponent");
+                    // TODO: Connect to server socket using serverIp
                 }
             });
 
@@ -49,5 +59,40 @@ public class MainMenuFrame extends JFrame {
             add(joinBtn, BorderLayout.CENTER);
 
         }
+    }
+
+    public void showGameBoard() {
+
+    }
+
+    public String getUserLanIp() {
+        String ip = "";
+        try {
+
+            for (final Enumeration<NetworkInterface> interfaces =
+                         NetworkInterface.getNetworkInterfaces();
+                 interfaces.hasMoreElements();
+                    ) {
+                final NetworkInterface cur = interfaces.nextElement();
+
+                if (cur.isLoopback()) {
+                    continue;
+                }
+
+                for (final InterfaceAddress addr : cur.getInterfaceAddresses()) {
+                    final InetAddress inet_addr = addr.getAddress();
+
+                    if (!(inet_addr instanceof Inet4Address)) {
+                        continue;
+                    }
+
+                    ip = inet_addr.getHostAddress();
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e.getStackTrace());
+        }
+
+        return ip;
     }
 }
