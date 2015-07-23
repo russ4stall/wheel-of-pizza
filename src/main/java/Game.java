@@ -57,4 +57,16 @@ public class Game {
 
 
     }
+
+    public WheelOfPizza getWop() {
+        return wop;
+    }
+
+    public Puzzle getPuzzle() {
+        return puzzle;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
 }

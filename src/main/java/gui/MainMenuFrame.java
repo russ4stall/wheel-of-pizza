@@ -1,9 +1,13 @@
 package main.java.gui;
 
+import main.java.Game;
+import main.java.game.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
@@ -20,7 +24,6 @@ public class MainMenuFrame extends JFrame {
         setResizable(false);
         setSize(new Dimension(300,100));
         add(new MainMenuPanel());
-
     }
 
     class MainMenuPanel extends JPanel  {
@@ -66,9 +69,17 @@ public class MainMenuFrame extends JFrame {
      * Create panels and game object and start the game
      */
     public void showGameBoard() {
-        GameBoardFrame gameBoardFrame = new GameBoardFrame();
-        TopGamePanel topGamePanel = new TopGamePanel();
-        BottomGamePanel bottomGamePanel = new BottomGamePanel();
+
+        Game game = new Game();
+        game.getPlayers().add(new Player(1, "Player 1", ""));
+        game.getPlayers().add(new Player(2, "Player 2", ""));
+
+        GameBoardFrame gameBoardFrame = new GameBoardFrame(game);
+
+        // Close Main Menu Frame
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        this.setVisible(false);
     }
 
     public String getUserLanIp() {
