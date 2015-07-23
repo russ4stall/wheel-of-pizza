@@ -74,7 +74,7 @@ public class BottomGamePanel extends JPanel {
         player2Panel.setLayout(new FlowLayout());
         player2Panel.add(new JLabel(game.getPlayers().get(1).getName()));
         player2Panel.add(new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore())));
-        add(player2Panel);
+        add(player2Panel)ssss;
     }
 
     @Override
