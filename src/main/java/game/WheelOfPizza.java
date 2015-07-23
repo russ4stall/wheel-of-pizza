@@ -50,7 +50,7 @@ public class WheelOfPizza {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {
-                Puzzle puzzle = new Puzzle(line, bufferedReader.readLine());
+                Puzzle puzzle = new Puzzle(line, bufferedReader.readLine().toUpperCase());
                 bufferedReader.readLine();
                 //System.out.println(puzzle);
                 puzzles.add(puzzle);

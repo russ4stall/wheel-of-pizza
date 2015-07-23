@@ -71,8 +71,8 @@ public class MainMenuFrame extends JFrame {
     public void showGameBoard() {
 
         Game game = new Game();
-        game.getPlayers().add(new Player(1, "Player 1", ""));
-        game.getPlayers().add(new Player(2, "Player 2", ""));
+        game.getPlayers().add(new Player(1, "Papa John", ""));
+        game.getPlayers().add(new Player(2, "Hungry Howie", ""));
 
         GameBoardFrame gameBoardFrame = new GameBoardFrame(game);
 
