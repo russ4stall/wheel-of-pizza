@@ -1,6 +1,7 @@
 package main.java.gui;
 
 import main.java.Game;
+import main.java.game.Player;
 import main.java.game.Turn;
 
 import javax.swing.*;
@@ -18,6 +19,8 @@ public class BottomGamePanel extends JPanel {
     private JPanel letterButtonsPanel;
     private List<JButton> consonantButtons;
     private List<JButton> vowelButtons;
+    private JLabel p1Score;
+    private JLabel p2Score;
 
     public BottomGamePanel(final Game game) {
         super();
@@ -36,7 +39,8 @@ public class BottomGamePanel extends JPanel {
                 public void actionPerformed(ActionEvent actionEvent) {
                     game.takeTurn(new Turn(0, "500", button.getText().charAt(0)));
                     //Todo: How do I repaint so it shows updated score?
-                    repaint();
+                    updateScores();
+
                 }
             });
 
@@ -65,38 +69,21 @@ public class BottomGamePanel extends JPanel {
         player1Panel.setPreferredSize(new Dimension(250, 200));
         player1Panel.setLayout(new FlowLayout());
         player1Panel.add(new JLabel(game.getPlayers().get(0).getName()));
-        player1Panel.add(new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore())));
-
+        p1Score = new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
+        player1Panel.add(p1Score);
         add(player1Panel);
 
         JPanel player2Panel = new JPanel();
         player2Panel.setPreferredSize(new Dimension(250, 200));
         player2Panel.setLayout(new FlowLayout());
         player2Panel.add(new JLabel(game.getPlayers().get(1).getName()));
-        player2Panel.add(new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore())));
+        p2Score = new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
+        player2Panel.add(p2Score);
         add(player2Panel);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        add(letterButtonsPanel);
-
-        JPanel player1Panel = new JPanel();
-        player1Panel.setPreferredSize(new Dimension(250, 200));
-        player1Panel.setLayout(new FlowLayout());
-        player1Panel.add(new JLabel(game.getPlayers().get(0).getName()));
-        player1Panel.add(new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore())));
-
-        add(player1Panel);
-
-        JPanel player2Panel = new JPanel();
-        player2Panel.setPreferredSize(new Dimension(250, 200));
-        player2Panel.setLayout(new FlowLayout());
-        player2Panel.add(new JLabel(game.getPlayers().get(1).getName()));
-        player2Panel.add(new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore())));
-        add(player2Panel);
-
+    private void updateScores() {
+        p1Score.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
+        p2Score.setText("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
     }
 }
