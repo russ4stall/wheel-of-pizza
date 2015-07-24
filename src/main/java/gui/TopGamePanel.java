@@ -32,6 +32,7 @@ public class TopGamePanel extends JPanel {
                     bottomGamePanel.setEnabledForAllVowelButtons(false);
                 } else {
                     game.turnOver();
+                    bottomGamePanel.outlineCurrentPlayer();
                     if (game.getCurrentPlayersScore() >= WheelOfPizza.VOWEL_COST) {
                         bottomGamePanel.setEnabledForAllVowelButtons(true);
                     }

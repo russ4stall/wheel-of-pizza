@@ -22,8 +22,8 @@ public class BottomGamePanel extends JPanel {
     private List<JButton> consonantButtons;
     private List<JButton> vowelButtons;
     private List<Character> usedLetters;
-    private JLabel p1Score;
-    private JLabel p2Score;
+    private PlayerPanel p1Panel;
+    private PlayerPanel p2Panel;
 
     public BottomGamePanel(final Game game, TopGamePanel tgp) {
         super();
@@ -32,7 +32,6 @@ public class BottomGamePanel extends JPanel {
 
         // initialize usedLetters list
         usedLetters = new ArrayList<Character>();
-
 
         // Make letter buttons
         consonantButtons = new ArrayList<JButton>();
@@ -60,17 +59,13 @@ public class BottomGamePanel extends JPanel {
                     }
                     topGamePanel.setEnabledSpinBtn(true);
                     updateScoreLabels();
+                    outlineCurrentPlayer();
                 }
             });
 
             if (letter != 'A' && letter != 'E' && letter != 'I' && letter != 'O' && letter != 'U') {
-
-
                 consonantButtons.add(button);
             } else {
-
-
-
                 vowelButtons.add(button);
             }
         }
@@ -89,26 +84,21 @@ public class BottomGamePanel extends JPanel {
 
         add(letterButtonsPanel);
 
-        JPanel player1Panel = new JPanel();
-        player1Panel.setPreferredSize(new Dimension(250, 200));
-        player1Panel.setLayout(new FlowLayout());
-        player1Panel.add(new JLabel(game.getPlayers().get(0).getName()));
-        p1Score = new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
-        player1Panel.add(p1Score);
-        add(player1Panel);
+        p1Panel = new PlayerPanel();
+        p1Panel.nameLbl.setText(game.getPlayers().get(0).getName());
+        p1Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
+        add(p1Panel);
 
-        JPanel player2Panel = new JPanel();
-        player2Panel.setPreferredSize(new Dimension(250, 200));
-        player2Panel.setLayout(new FlowLayout());
-        player2Panel.add(new JLabel(game.getPlayers().get(1).getName()));
-        p2Score = new JLabel("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
-        player2Panel.add(p2Score);
-        add(player2Panel);
+        p2Panel = new PlayerPanel();
+        p2Panel.nameLbl.setText(game.getPlayers().get(0).getName());
+        p2Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
+        add(p2Panel);
+
     }
 
     public void updateScoreLabels() {
-        p1Score.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
-        p2Score.setText("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
+        p1Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
+        p2Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
     }
 
     public void setEnabledForAllConsanantButtons(boolean b) {
@@ -150,5 +140,13 @@ public class BottomGamePanel extends JPanel {
         setEnabledForAllVowelButtons(b);
     }
 
-
+    public void outlineCurrentPlayer() {
+        if (game.getWhoseTurnItIs() == 0) {
+            p1Panel.addBorder();
+            p2Panel.removeBorder();
+        } else {
+            p2Panel.addBorder();
+            p1Panel.removeBorder();
+        }
+    }
 }
