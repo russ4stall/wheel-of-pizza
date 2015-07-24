@@ -5,12 +5,12 @@ package main.java.game;
  */
 public class Turn {
     private int playerIndex;
-    private String spinValue;
+    private String spinResult;
     private char guess;
 
     public Turn(int playerIndex, String spinValue, char guess) {
         this.playerIndex = playerIndex;
-        this.spinValue = spinValue;
+        this.spinResult = spinValue;
         this.guess = guess;
     }
 
@@ -18,8 +18,8 @@ public class Turn {
         return playerIndex;
     }
 
-    public String getSpinValue() {
-        return spinValue;
+    public String getSpinResult() {
+        return spinResult;
     }
 
     public char getGuess() {

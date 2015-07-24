@@ -14,7 +14,8 @@ public class GameBoardFrame extends JFrame {
         super("Wheel Of Pizza");
 
         TopGamePanel topGamePanel = new TopGamePanel(game);
-        BottomGamePanel bottomGamePanel = new BottomGamePanel(game);
+        topGamePanel.setPreferredSize(new Dimension(900, 300));
+        BottomGamePanel bottomGamePanel = new BottomGamePanel(game, topGamePanel);
 
         setLayout(new FlowLayout());
         add(topGamePanel);

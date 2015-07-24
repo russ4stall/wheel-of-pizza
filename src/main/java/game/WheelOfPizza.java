@@ -15,11 +15,11 @@ public class WheelOfPizza {
     public static final String LOSE_A_TURN = "LOSE A TURN";
     private static final String PUZZLE_PATH = "src/main/resources/puzzles.txt";
     private List<Puzzle> puzzles;
-    private String[] spinValues;
+    private String[] spinResults;
 
     public WheelOfPizza() {
         initializePuzzleList();
-        initializeSpinValues();
+        initializeSpinResults();
     }
 
     //Returns a random puzzle from list,
@@ -32,8 +32,8 @@ public class WheelOfPizza {
         return puzzle;
     }
 
-    private void initializeSpinValues() {
-        spinValues = new String[] {"2500", "300", "300", "300", "300", "300", "300",
+    private void initializeSpinResults() {
+        spinResults = new String[] {"2500", "300", "300", "300", "300", "300", "300",
                 "600", "500", BANKRUPT, "550", "400", "900", "500", "900", BANKRUPT,
                 "600", "400", LOSE_A_TURN, "800", "350", "450", "700", "600"};
     }
@@ -65,6 +65,11 @@ public class WheelOfPizza {
         }
 
         return puzzles;
+    }
+
+    public String getRandomSpinResult() {
+        Random randy = new Random();
+        return spinResults[randy.nextInt(spinResults.length)];
     }
 
 

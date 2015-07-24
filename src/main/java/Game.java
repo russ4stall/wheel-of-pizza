@@ -16,6 +16,7 @@ public class Game {
     private WheelOfPizza wop;
     private Puzzle puzzle;
     private List<Player> players;
+    private int whoseTurnItIs;
 
     public Game() {
         wop = new WheelOfPizza();
@@ -44,7 +45,7 @@ public class Game {
 
         // If at least one occurrence, add score and return true
         if (guessOccurrences > 0) {
-            int addScore = guessOccurrences * Integer.valueOf(turn.getSpinValue());
+            int addScore = guessOccurrences * Integer.valueOf(turn.getSpinResult());
             players.get(turn.getPlayerIndex()).addToScore(addScore);
             return true;
         }
@@ -68,5 +69,21 @@ public class Game {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public int getWhoseTurnItIs() {
+        return whoseTurnItIs;
+    }
+
+    public void setWhoseTurnItIs(int whoseTurnItIs) {
+        this.whoseTurnItIs = whoseTurnItIs;
+    }
+
+    public int turnOver() {
+        whoseTurnItIs++;
+        if (whoseTurnItIs > players.size()-1) {
+            whoseTurnItIs = 0;
+        }
+        return whoseTurnItIs;
     }
 }

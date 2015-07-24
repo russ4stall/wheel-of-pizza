@@ -16,15 +16,17 @@ import java.util.List;
  */
 public class BottomGamePanel extends JPanel {
     private Game game;
+    private TopGamePanel topGamePanel;
     private JPanel letterButtonsPanel;
     private List<JButton> consonantButtons;
     private List<JButton> vowelButtons;
     private JLabel p1Score;
     private JLabel p2Score;
 
-    public BottomGamePanel(final Game game) {
+    public BottomGamePanel(final Game game, TopGamePanel tgp) {
         super();
         this.game = game;
+        this.topGamePanel = tgp;
 
         // Make letter buttons
         consonantButtons = new ArrayList<JButton>();
@@ -37,10 +39,13 @@ public class BottomGamePanel extends JPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    game.takeTurn(new Turn(0, "500", button.getText().charAt(0)));
-                    //Todo: How do I repaint so it shows updated score?
-                    updateScores();
 
+                    game.takeTurn(new Turn(game.getWhoseTurnItIs(), topGamePanel.getSpinResult(), button.getText().charAt(0)));
+
+
+                    button.setEnabled(false);
+
+                    updateScores();
                 }
             });
 
@@ -85,5 +90,22 @@ public class BottomGamePanel extends JPanel {
     private void updateScores() {
         p1Score.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
         p2Score.setText("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
+    }
+
+    public void setEnabledForAllConsanantButtons(boolean b) {
+        for (JButton button : consonantButtons) {
+            button.setEnabled(b);
+        }
+    }
+
+    public void setEnabledForAllVowelButtons(boolean b) {
+        for (JButton button : vowelButtons) {
+            button.setEnabled(b);
+        }
+    }
+
+    public void setEnabledForAllLetterButtons(boolean b) {
+        setEnabledForAllConsanantButtons(b);
+        setEnabledForAllVowelButtons(b);
     }
 }
