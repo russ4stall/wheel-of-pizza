@@ -11,6 +11,7 @@ import java.util.Random;
  * @author Russ Forstall
  */
 public class WheelOfPizza {
+    public static final int VOWEL_COST = 500;
     public static final String BANKRUPT = "BANKRUPT";
     public static final String LOSE_A_TURN = "LOSE A TURN";
     private static final String PUZZLE_PATH = "src/main/resources/puzzles.txt";

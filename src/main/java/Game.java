@@ -21,6 +21,7 @@ public class Game {
     public Game() {
         wop = new WheelOfPizza();
         puzzle = wop.getRandomPuzzle();
+        System.out.println(puzzle);
         players = new ArrayList<Player>();
     }
 
@@ -43,10 +44,17 @@ public class Game {
             }
         }
 
+        // If vowel
+        if (turn.getGuess() == 'A' || turn.getGuess() == 'E' || turn.getGuess() == 'I' || turn.getGuess() == 'O' || turn.getGuess() == 'U') {
+            getCurrentPlayer().addToScore(-500);
+
+            return (guessOccurrences > 0);
+        }
+
         // If at least one occurrence, add score and return true
         if (guessOccurrences > 0) {
             int addScore = guessOccurrences * Integer.valueOf(turn.getSpinResult());
-            players.get(turn.getPlayerIndex()).addToScore(addScore);
+            getCurrentPlayer().addToScore(addScore);
             return true;
         }
 
@@ -85,5 +93,13 @@ public class Game {
             whoseTurnItIs = 0;
         }
         return whoseTurnItIs;
+    }
+
+    public int getCurrentPlayersScore() {
+        return players.get(whoseTurnItIs).getScore();
+    }
+
+    public Player getCurrentPlayer() {
+        return players.get(whoseTurnItIs);
     }
 }

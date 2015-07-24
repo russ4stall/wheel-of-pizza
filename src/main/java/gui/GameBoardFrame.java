@@ -16,6 +16,7 @@ public class GameBoardFrame extends JFrame {
         TopGamePanel topGamePanel = new TopGamePanel(game);
         topGamePanel.setPreferredSize(new Dimension(900, 300));
         BottomGamePanel bottomGamePanel = new BottomGamePanel(game, topGamePanel);
+        topGamePanel.setBottomGamePanel(bottomGamePanel);
 
         setLayout(new FlowLayout());
         add(topGamePanel);
