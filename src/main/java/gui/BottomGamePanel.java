@@ -60,7 +60,10 @@ public class BottomGamePanel extends JPanel {
                     topGamePanel.setEnabledSpinBtn(true);
                     updateScoreLabels();
                     outlineCurrentPlayer();
+                    topGamePanel.letterBoard.repaint();
+
                 }
+
             });
 
             if (letter != 'A' && letter != 'E' && letter != 'I' && letter != 'O' && letter != 'U') {
