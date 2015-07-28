@@ -149,4 +149,17 @@ public class BottomGamePanel extends JPanel {
             p1Panel.removeBorder();
         }
     }
+
+    // added functions
+    public Boolean isInList(char c) {
+
+        Boolean b = false;
+        for (Character character : usedLetters) {
+            if(c == character)
+                b = true;
+        }
+        return b;
+
+    }
+
 }

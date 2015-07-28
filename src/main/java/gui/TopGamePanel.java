@@ -4,6 +4,7 @@ import main.java.Game;
 import main.java.game.WheelOfPizza;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,10 +16,16 @@ public class TopGamePanel extends JPanel {
     private String spinResult = "0";
     private JButton spinBtn;
     private BottomGamePanel bottomGamePanel;
+    private Spinner spinner;
+    private LetterBoard letterBoard;
 
     public TopGamePanel(final Game game) {
         super();
         this.game = game;
+        setBackground(Color.blue);  // added debug ---------
+
+        spinner = new Spinner();  // added ----------------
+        letterBoard = new LetterBoard(game, this);	// added ----------------
 
         final JLabel spinResultLbl = new JLabel("");
         spinBtn = new JButton("SPIN");
@@ -38,12 +45,21 @@ public class TopGamePanel extends JPanel {
                     }
                 }
 
+                spinner.spinTheWheel();  // added -----------------
                 spinResultLbl.setText(spinResult);
             }
         });
 
+        // added -------------------------------
+        JPanel jp = new JPanel();
+        jp.setLayout(new GridLayout(1,2));
+        jp.add(spinner);
+        jp.add(letterBoard, BorderLayout.CENTER);
+        jp.setPreferredSize(new Dimension(900, 300));
+
         add(spinBtn);
-        add(spinResultLbl);
+        add(jp);  // added -----------------------
+        //  add(spinResultLbl);
 
     }
 
@@ -84,5 +100,12 @@ public class TopGamePanel extends JPanel {
     public void setBottomGamePanel(BottomGamePanel bottomGamePanel) {
         this.bottomGamePanel = bottomGamePanel;
     }
+
+    // added functions
+
+    // this is inteded to call a function in bottomGamepanel (where the used Letters list is)
+    // intended to prevent passing extra passing
+    public Boolean isInList(char c) { return bottomGamePanel.isInList(c); }
+
 }
 
