@@ -61,7 +61,6 @@ public class BottomGamePanel extends JPanel {
                     updateScoreLabels();
                     outlineCurrentPlayer();
                     topGamePanel.letterBoard.repaint();
-
                 }
 
             });
