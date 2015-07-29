@@ -17,7 +17,7 @@ public class TopGamePanel extends JPanel {
     private JButton spinBtn;
     private BottomGamePanel bottomGamePanel;
     private Spinner spinner;
-    private LetterBoard letterBoard;
+    public LetterBoard letterBoard;
 
     public TopGamePanel(final Game game) {
         super();
