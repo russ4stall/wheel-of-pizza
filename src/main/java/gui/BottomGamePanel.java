@@ -52,17 +52,8 @@ public class BottomGamePanel extends JPanel {
                         game.turnOver();
                     }
 
-                    setEnabledForAllLetterButtons(false);
-                    // If score >= 500 allow user to buy vowel
-                    if (game.getCurrentPlayersScore() >= WheelOfPizza.VOWEL_COST) {
-                        enableUnusedVowelButtons();
-                    }
-                    topGamePanel.setEnabledSpinBtn(true);
-                    updateScoreLabels();
-                    outlineCurrentPlayer();
-                    topGamePanel.letterBoard.repaint();
+                    resetBoardForTurn();
                 }
-
             });
 
             if (letter != 'A' && letter != 'E' && letter != 'I' && letter != 'O' && letter != 'U') {
@@ -73,7 +64,7 @@ public class BottomGamePanel extends JPanel {
         }
 
         letterButtonsPanel = new JPanel();
-        letterButtonsPanel.setPreferredSize(new Dimension(250, 200));
+        letterButtonsPanel.setPreferredSize(new Dimension(250, 180));
         letterButtonsPanel.setLayout(new GridLayout(6, 5, 2, 2));
 
         for (JButton button : vowelButtons) {
@@ -83,6 +74,38 @@ public class BottomGamePanel extends JPanel {
         for (JButton button : consonantButtons) {
             letterButtonsPanel.add(button);
         }
+
+        // SOLVE PUZZLE FUNCTIONALITY
+        JButton solveBtn = new JButton("Solve Puzzle");
+        solveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                String userGuess = JOptionPane.showInputDialog("Solve the puzzle");
+                userGuess = userGuess.replaceAll("\\s+","");
+
+                String puzzleWord = game.getPuzzle().getPhrase().replaceAll("\\s+","");
+
+                if (puzzleWord.toUpperCase().equals(userGuess.toUpperCase())){
+                    //player wins!
+                    JOptionPane.showMessageDialog(null, "CORRECT! " + game.getCurrentPlayer().getName() +
+                            " wins " + game.getCurrentPlayer().getScore() + " pizza points! \n " +
+                            "Click OK to start a new game.");
+                    game.newGame();
+                    topGamePanel.letterBoard.setPuzzlePhrase(game.getPuzzle().getPhrase());
+                    usedLetters.clear();
+                    resetBoardForTurn();
+
+                }
+                else {
+                    // wrong, next persons turn
+                    game.turnOver();
+                    JOptionPane.showMessageDialog(null, "WRONG! \n" + game.getCurrentPlayer().getName() + "'s turn.");
+
+                    resetBoardForTurn();
+                }
+            }
+        });
+        add(solveBtn);
 
         add(letterButtonsPanel);
 
@@ -162,6 +185,18 @@ public class BottomGamePanel extends JPanel {
         }
         return b;
 
+    }
+
+    public void resetBoardForTurn() {
+        setEnabledForAllLetterButtons(false);
+        // If score >= 500 allow user to buy vowel
+        if (game.getCurrentPlayersScore() >= WheelOfPizza.VOWEL_COST) {
+            enableUnusedVowelButtons();
+        }
+        topGamePanel.setEnabledSpinBtn(true);
+        updateScoreLabels();
+        outlineCurrentPlayer();
+        topGamePanel.letterBoard.repaint();
     }
 
 }

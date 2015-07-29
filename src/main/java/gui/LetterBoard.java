@@ -84,4 +84,8 @@ public class LetterBoard extends JPanel {
                 (getHeight() - PUZZLE_HEIGHT) / 3 + (row + 1)
                         * (SQUARE_HEIGHT + SPACE_WIDTH) - SQUARE_HEIGHT / 6);
     }
+
+    public void setPuzzlePhrase(String puzzlePhrase) {
+        this.puzzlePhrase = puzzlePhrase;
+    }
 }

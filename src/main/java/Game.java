@@ -30,6 +30,13 @@ public class Game {
         mainMenuFrame.setVisible(true);
     }
 
+    public void newGame(){
+        puzzle = wop.getRandomPuzzle();
+        for (Player player : players) {
+            player.setScore(0);
+        }
+    }
+
     /**
      * Handles a Player's guess
      * @param turn
