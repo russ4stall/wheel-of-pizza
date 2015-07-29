@@ -35,6 +35,7 @@ public class MainMenuFrame extends JFrame {
 
         public MainMenuPanel() {
             super();
+
             setLayout(new FlowLayout());
 
             createBtn.addActionListener(new ActionListener() {

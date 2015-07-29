@@ -16,6 +16,7 @@ import java.util.List;
  * @author Russ Forstall
  */
 public class BottomGamePanel extends JPanel {
+    private static final String HOW_TO_PLAY_TEXT = "Just like wheel of fortune but cooler... and with pizza.";
     private Game game;
     private TopGamePanel topGamePanel;
     private JPanel letterButtonsPanel;
@@ -105,7 +106,21 @@ public class BottomGamePanel extends JPanel {
                 }
             }
         });
-        add(solveBtn);
+
+        JButton howToPlayBtn = new JButton("How To Play");
+        howToPlayBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                JOptionPane.showMessageDialog(null, HOW_TO_PLAY_TEXT);
+            }
+        });
+
+        JPanel btnPanel = new JPanel(new GridLayout(2,1));
+        btnPanel.add(howToPlayBtn);
+
+        btnPanel.add(solveBtn);
+
+        add(btnPanel);
 
         add(letterButtonsPanel);
 
