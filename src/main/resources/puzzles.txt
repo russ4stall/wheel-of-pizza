@@ -1,11 +1,11 @@
 Person
-Jack Black
+               Jack          Black              
 
 Food
-Pizza
+               Pizza                            
 
 Person
-Slash
+               Slash                            
 
 Movie
-Good Will Hunting
+              Good Will    Hunting              

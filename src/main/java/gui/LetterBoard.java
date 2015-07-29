@@ -13,12 +13,12 @@ import main.java.Game;
 public class LetterBoard extends JPanel {
 
     private static final int
-            SQUARE_WIDTH = 35,
-            SQUARE_HEIGHT = 45,
+            SQUARE_WIDTH = 30,
+            SQUARE_HEIGHT = 30,
             SPACE_WIDTH = 2,
             PUZZLE_WIDTH = 12 * SQUARE_WIDTH,
             PUZZLE_HEIGHT = 4 * SQUARE_HEIGHT,
-            FONT_SIZE = 40;
+            FONT_SIZE = 25;
 
     private Game game;
     private TopGamePanel bottomGamePanel;
@@ -56,7 +56,7 @@ public class LetterBoard extends JPanel {
             // set to true to draw all letters as of now
 
             if (bottomGamePanel.isInList(phrase.charAt(i))) {
-               // if (true) {
+            //   if (true) {
 
                 g.setColor(Color.BLACK);
                 g.setFont(new Font("Bitstream Vera Sans Mono", Font.PLAIN, FONT_SIZE));
@@ -67,7 +67,12 @@ public class LetterBoard extends JPanel {
 
     private void paintLetterBox(Graphics g, int row, int col, boolean b) {
 
-        g.setColor(b ? Color.GREEN.darker() : Color.WHITE);
+        //g.setColor(b ? Color.GREEN.darker() : Color.WHITE);
+        if(b == true)
+            g.setColor(Color.YELLOW);
+        else
+            g.setColor(Color.WHITE);
+
         g.fillRect((getWidth() - PUZZLE_WIDTH) / 2 + col
                 * (SQUARE_WIDTH + SPACE_WIDTH), (getHeight() - PUZZLE_HEIGHT) / 3
                 + row * (SQUARE_HEIGHT + SPACE_WIDTH), SQUARE_WIDTH, SQUARE_HEIGHT);

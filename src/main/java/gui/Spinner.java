@@ -19,7 +19,7 @@ public class Spinner extends JPanel{
             CIRCLE_DEGREES 		= 360,
             DEGREE_INCREMENT 	= 10,
             PIZZA_X_COOR 		= 100,
-            PIZZA_Y_COOR 		= 3;
+            PIZZA_Y_COOR 		= 10;
 
     private ImageIcon icon;
     private JLabel iconLabel;
