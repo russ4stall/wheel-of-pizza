@@ -92,8 +92,8 @@ public class BottomGamePanel extends JPanel {
         add(p1Panel);
 
         p2Panel = new PlayerPanel();
-        p2Panel.nameLbl.setText(game.getPlayers().get(0).getName());
-        p2Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
+        p2Panel.nameLbl.setText(game.getPlayers().get(1).getName());
+        p2Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
         add(p2Panel);
 
     }
