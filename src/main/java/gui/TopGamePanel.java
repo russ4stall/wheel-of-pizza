@@ -4,6 +4,7 @@ import main.java.Game;
 import main.java.game.WheelOfPizza;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,12 +23,13 @@ public class TopGamePanel extends JPanel {
     public TopGamePanel(final Game game) {
         super();
         this.game = game;
-        setBackground(Color.blue);  // added debug ---------
+        //setBackground(Color.blue);  // added debug ---------
 
         spinner = new Spinner();  // added ----------------
         letterBoard = new LetterBoard(game, this);	// added ----------------
 
         final JLabel spinResultLbl = new JLabel("");
+        final JLabel categoryLbl = new JLabel("");
         spinBtn = new JButton("SPIN");
         spinBtn.addActionListener(new ActionListener() {
             @Override
@@ -47,19 +49,28 @@ public class TopGamePanel extends JPanel {
 
                 spinner.spinTheWheel();  // added -----------------
                 spinResultLbl.setText(spinResult);
+                categoryLbl.setText(game.getPuzzle().getCategory());
             }
         });
 
         // added -------------------------------
         JPanel jp = new JPanel();
+
+        JPanel letterPanel = new JPanel();
+        //letterPanel.setLayout(new BorderLayout());
+        //letterPanel.add(letterBoard, BorderLayout.CENTER);
+        //letterPanel.add(categoryLbl, BorderLayout.SOUTH);
+
         jp.setLayout(new GridLayout(1,2));
         jp.add(spinner);
-        jp.add(letterBoard, BorderLayout.CENTER);
+        jp.add(letterBoard);
         jp.setPreferredSize(new Dimension(900, 300));
 
-        add(spinBtn);
+        add(spinBtn, BorderLayout.NORTH);
+        add(spinResultLbl, BorderLayout.NORTH);
+
         add(jp);  // added -----------------------
-        //  add(spinResultLbl);
+
 
     }
 

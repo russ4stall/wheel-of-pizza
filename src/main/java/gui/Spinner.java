@@ -30,7 +30,7 @@ public class Spinner extends JPanel{
 
     // constructor
     Spinner (){
-        setBackground(Color.pink);
+        //setBackground(Color.pink);
 
         icon = new ImageIcon(PICTURE_PATH);
         iconLabel = new JLabel();

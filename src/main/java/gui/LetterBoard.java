@@ -3,9 +3,8 @@ package main.java.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.List;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import main.java.Game;
 
@@ -13,23 +12,26 @@ import main.java.Game;
 public class LetterBoard extends JPanel {
 
     private static final int
-            SQUARE_WIDTH = 30,
-            SQUARE_HEIGHT = 30,
-            SPACE_WIDTH = 2,
-            PUZZLE_WIDTH = 12 * SQUARE_WIDTH,
-            PUZZLE_HEIGHT = 4 * SQUARE_HEIGHT,
-            FONT_SIZE = 25;
+            BOX_WIDE = 30,
+            BOX_HIGH = 30,
+            SPACING = 2,
+            FONT = 25,
+            CHARACTERS_WIDE = 12 * BOX_WIDE,
+            CHARACTERS_HIGH = 4 * BOX_HIGH;
 
     private Game game;
     private TopGamePanel bottomGamePanel;
     private String puzzlePhrase;
+    private JLabel categoryLabel = new JLabel();
 
     public LetterBoard (Game g, TopGamePanel b){
         super();
-        setBackground(Color.green);
+        //setBackground(Color.green);
         bottomGamePanel = b;
         game = g;
         puzzlePhrase = game.getPuzzle().getPhrase();
+        categoryLabel.setText(game.getPuzzle().getCategory());
+        add(categoryLabel);
 
     }
 
@@ -49,8 +51,6 @@ public class LetterBoard extends JPanel {
             //debug **********
             System.out.print(phrase.charAt(i) + "_");
 
-            //System.out.print(phrase.charAt(i) + "_");
-
 
             // Draw letter in this box if it has been revealed
             // set to true to draw all letters as of now
@@ -59,7 +59,7 @@ public class LetterBoard extends JPanel {
             //   if (true) {
 
                 g.setColor(Color.BLACK);
-                g.setFont(new Font("Bitstream Vera Sans Mono", Font.PLAIN, FONT_SIZE));
+                g.setFont(new Font("Bitstream Vera Sans Mono", Font.PLAIN, FONT));
                 drawLetter(g, ("" + phrase.charAt(i)).toUpperCase(), row, col);
             }
         }
@@ -67,22 +67,22 @@ public class LetterBoard extends JPanel {
 
     private void paintLetterBox(Graphics g, int row, int col, boolean b) {
 
-        //g.setColor(b ? Color.GREEN.darker() : Color.WHITE);
         if(b == true)
-            g.setColor(Color.YELLOW);
+            g.setColor(Color.YELLOW.darker());
         else
-            g.setColor(Color.WHITE);
+            g.setColor(Color.RED.darker());
 
-        g.fillRect((getWidth() - PUZZLE_WIDTH) / 2 + col
-                * (SQUARE_WIDTH + SPACE_WIDTH), (getHeight() - PUZZLE_HEIGHT) / 3
-                + row * (SQUARE_HEIGHT + SPACE_WIDTH), SQUARE_WIDTH, SQUARE_HEIGHT);
+        g.fillRect(
+                (getWidth() - CHARACTERS_WIDE) / 2 + col * (BOX_WIDE + SPACING),
+                (getHeight() - CHARACTERS_HIGH) / 3 + row * (BOX_HIGH + SPACING),
+                BOX_WIDE,
+                BOX_HIGH);
     }
 
     private void drawLetter(Graphics g, String str, int row, int col) {
-        g.drawString(str, (getWidth() - PUZZLE_WIDTH) / 2 + col
-                        * (SQUARE_WIDTH + SPACE_WIDTH) + SQUARE_WIDTH / 8,
-                (getHeight() - PUZZLE_HEIGHT) / 3 + (row + 1)
-                        * (SQUARE_HEIGHT + SPACE_WIDTH) - SQUARE_HEIGHT / 6);
+        g.drawString( str,
+                (getWidth() - CHARACTERS_WIDE) / 2 + col * (BOX_WIDE + SPACING) + BOX_WIDE / 8,
+                (getHeight() - CHARACTERS_HIGH) / 3 + (row + 1) * (BOX_HIGH + SPACING) - BOX_HIGH / 6);
     }
 
     public void setPuzzlePhrase(String puzzlePhrase) {
