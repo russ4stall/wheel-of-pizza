@@ -29,7 +29,7 @@ public class Spinner extends JPanel{
     private javax.swing.Timer spinnerTimer;
 
     // constructor
-    Spinner (){
+    public Spinner() {
         //setBackground(Color.pink);
 
         icon = new ImageIcon(PICTURE_PATH);

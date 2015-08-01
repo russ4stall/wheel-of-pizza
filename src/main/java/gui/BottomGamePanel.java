@@ -16,7 +16,18 @@ import java.util.List;
  * @author Russ Forstall
  */
 public class BottomGamePanel extends JPanel {
-    private static final String HOW_TO_PLAY_TEXT = "Just like wheel of fortune but cooler... and with pizza.";
+    private static final String HOW_TO_PLAY_TEXT = "Just like wheel of fortune but cooler... and with pizza.\n\n" +
+            "To take a turn, either spin the wheel, buy a vowel, or solve the puzzle. \n\n" +
+            "Once you spin, a value will appear next to the spin button and you must choose a letter.\n" +
+            "Your score will increase according to how many times the letter occurs in the puzzle.\n" +
+            "If the letter doesn't exist in the puzzle, you will lose your turn.\n\n" +
+            "Vowels cost 500 points. If you don't have enough points, you must spin or solve. \n\n" +
+            "To solve the puzzle, click the \"Solve Puzzle\" button and type in your answer. \n" +
+            "A correct answer wins the game and an incorrect answer loses a turn.\n\n" +
+            "Good luck and may the Schwartz be with you.";
+
+    private static final String PAPA_JOHN_PICTURE_PATH = "src/main/resources/papaJohn_150.png";
+    private static final String HUNGRY_HOWIE_PICTURE_PATH = "src/main/resources/hungryHowie_150.jpg";
     private Game game;
     private TopGamePanel topGamePanel;
     private JPanel letterButtonsPanel;
@@ -124,16 +135,17 @@ public class BottomGamePanel extends JPanel {
 
         add(letterButtonsPanel);
 
-        p1Panel = new PlayerPanel();
+        p1Panel = new PlayerPanel(PAPA_JOHN_PICTURE_PATH);
         p1Panel.nameLbl.setText(game.getPlayers().get(0).getName());
         p1Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(0).getScore()));
         add(p1Panel);
 
-        p2Panel = new PlayerPanel();
+        p2Panel = new PlayerPanel(HUNGRY_HOWIE_PICTURE_PATH);
         p2Panel.nameLbl.setText(game.getPlayers().get(1).getName());
         p2Panel.scoreLbl.setText("SCORE: " + String.valueOf(game.getPlayers().get(1).getScore()));
         add(p2Panel);
 
+        outlineCurrentPlayer();
     }
 
     public void updateScoreLabels() {
